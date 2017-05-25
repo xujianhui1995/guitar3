@@ -58,6 +58,10 @@ guitar工厂类：
 
 ![](https://github.com/xujianhui1995/guitar3/blob/master/add.PNG)
 
+Junit测试：
+-------
+
+![](https://github.com/xujianhui1995/guitar3/blob/master/test.PNG)
 
 更换数据库：
 ---------
