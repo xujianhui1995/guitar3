@@ -15,8 +15,8 @@ guitar工厂类：
 			     .getResourceAsStream("daoConfig.properties");
 		try {
 			properties.load(inStream);
-			String userDaoImpl = properties.getProperty("InventoryDao");
-			inventoryDao = (InventoryDao) Class.forName(userDaoImpl).newInstance();
+			String DaoImpl = properties.getProperty("InventoryDao");
+			inventoryDao = (InventoryDao) Class.forName(DaoImpl).newInstance();
 		} catch (Throwable e) {
 			throw new ExceptionInInitializerError(e);// 此问题非常严重
 		} finally {
