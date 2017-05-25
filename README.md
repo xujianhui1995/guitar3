@@ -39,20 +39,25 @@ guitar工厂类：
   
 
 查询界面：
--------
+------
 
+![](https://github.com/xujianhui1995/guitar3/blob/master/search.PNG)
 
 查询结果：
 --------
 
+![](https://github.com/xujianhui1995/guitar3/blob/master/list.PNG)
 
 删除结果：
--------
+------
 
+![](https://github.com/xujianhui1995/guitar3/blob/master/success.PNG)
 
 更换数据库：
 ---------
 修改配置文件
+
+![](https://github.com/xujianhui1995/guitar3/blob/master/config.PNG)
 
 
 
