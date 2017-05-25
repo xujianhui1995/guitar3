@@ -53,6 +53,12 @@ guitar工厂类：
 
 ![](https://github.com/xujianhui1995/guitar3/blob/master/success.PNG)
 
+新增guitar：
+-----------
+
+![](https://github.com/xujianhui1995/guitar3/blob/master/add.PNG)
+
+
 更换数据库：
 ---------
 修改配置文件
