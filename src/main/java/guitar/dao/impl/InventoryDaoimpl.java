@@ -11,6 +11,7 @@ import java.util.List;
 import guitar.dao.InventoryDao;
 import guitar.domain.Guitar;
 import guitar.domain.GuitarSpec;
+import guitar.domain.Inventory;
 
 public abstract class InventoryDaoimpl implements InventoryDao {
 	private List<Guitar> guitars;
@@ -22,43 +23,7 @@ public abstract class InventoryDaoimpl implements InventoryDao {
 	}
 
 	public abstract Connection getConnection();
-	@Override
-	public boolean add(Guitar guitar) {
-		sql = "insert into guitar values(?,?,?,?,?,?,?,?);";
-		try {
-			pstmt = getConnection().prepareStatement(sql);
-			pstmt.setString(1, guitar.getSerialNumber());
-			pstmt.setDouble(2, guitar.getPrice());
-			pstmt.setString(3, guitar.getSpec().getBuilder());
-			pstmt.setString(4, guitar.getSpec().getModel());
-			pstmt.setInt(5, guitar.getSpec().getNumStrings());
-			pstmt.setString(6, guitar.getSpec().getType());
-			pstmt.setString(7, guitar.getSpec().getBackWood());
-			pstmt.setString(8, guitar.getSpec().getTopWood());
-			pstmt.executeUpdate();
-			pstmt.close();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-	@Override
-	public boolean del(String serialNumber) {		
-		sql = "DELETE FROM guitar where serialNumber=?;";
-		try {
-			pstmt = getConnection().prepareStatement(sql);
-			pstmt.setString(1, serialNumber);
-			pstmt.executeUpdate();
-			pstmt.close();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
+
 	public List<Guitar> getGuitarLinkedList() {
 		sql = "select * from guitar;";
 		try {
@@ -87,16 +52,49 @@ public abstract class InventoryDaoimpl implements InventoryDao {
 	}
 
 	@Override
+	public boolean add(Guitar guitar) {
+		sql = "insert into guitar values(?,?,?,?,?,?,?,?);";
+		try {
+			pstmt = getConnection().prepareStatement(sql);
+			pstmt.setString(1, guitar.getSerialNumber());
+			pstmt.setDouble(2, guitar.getPrice());
+			pstmt.setString(3, guitar.getSpec().getBuilder());
+			pstmt.setString(4, guitar.getSpec().getModel());
+			pstmt.setInt(5, guitar.getSpec().getNumStrings());
+			pstmt.setString(6, guitar.getSpec().getType());
+			pstmt.setString(7, guitar.getSpec().getBackWood());
+			pstmt.setString(8, guitar.getSpec().getTopWood());
+			pstmt.executeUpdate();
+			pstmt.close();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean del(String serialNumber) {
+		sql = "DELETE FROM guitar where serialNumber=?;";
+		try {
+			pstmt = getConnection().prepareStatement(sql);
+			pstmt.setString(1, serialNumber);
+			pstmt.executeUpdate();
+			pstmt.close();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
 	public List<Guitar> Search(Guitar searchGuitar) {
 		// TODO Auto-generated method stub
-		guitars = getGuitarLinkedList();
-		List<Guitar> matchingGuitars = new LinkedList<Guitar>();
-		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
-			Guitar guitar = (Guitar) i.next();
-			if (guitar.getSpec().matches(searchGuitar.getSpec()))
-				matchingGuitars.add(guitar);
-		}
-		return matchingGuitars;
+		Inventory.guitars=getGuitarLinkedList();
+		return Inventory.search(searchGuitar.getSpec());
 
 	}
 
